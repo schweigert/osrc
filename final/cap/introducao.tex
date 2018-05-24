@@ -11,9 +11,19 @@ Por esse motivo, esta seção irá introduzir os conceitos de microsserviços, c
 
 
 \subsection{Microserviços}
-Entende-se por microsserviço aplicações que executam operações menores de um macrosserviço, da melhor forma possível~\cite{stephenclarkewillson2017, Newman2015Feb}.
 
+Entende-se por microsserviço, aplicações que executam operações menores de um macrosserviço, da melhor forma possível~\cite{stephenclarkewillson2017, Newman2015Feb}.
+%
+O objetivo de uma arquitetura de microsserviços é funcionar separadamente de forma autônoma, contendo baixo acoplamento~\cite{Newman2015Feb}.
+%
+Seu funcionamento deve ser desenhado para permitir alinhamentos de alta coesão e baixo acoplamento entre os demais microsserviços existentes em um macrosserviço~\cite{8169955}.
+
+
+
+Arquiteturas de microsserviços iniciam uma nova linha de desenvolvimento de aplicações preparadas para executar sobre nuvens computacionais, promovendo maior flexibilidade, escalabilidade, gerenciamento e desempenho, sendo a principal escolha de arquitetura de grandes empresas como Amazon, Netflix e LinkedIn~\cite{7830692,7515686}.
+%
 Um microsserviço é definido pelas seguintes características~\cite{8169955}:
+
 
 
 \begin{itemize}
@@ -28,35 +38,19 @@ Um microsserviço é definido pelas seguintes características~\cite{8169955}:
 
 
 
-\subsection{Containers}
-Os container permitem ao desenvolvedor "empacotar" sua aplicação e todas as suas dependências(ex. bibliotecas), dessa forma, lhe é garantido que a aplicação terá o mesmo comportamento independentemente do hospedeiro Linux.
-
-\subsection{Docker}
-Docker é uma plataforma que nos permite "construir, emabarcar e rodar uma aplicação em qualquer lugar". Ele percorreu um longo caminho em um período de tempo incrivelmente curto e atualmente é considerado uma solução padrão para um dos apectos mais custosos do software: a implantação (citar Docker in Pratice)
-
-Docker é uma ferramenta desenvolvida para facilitar o processo de criação, implantação e execução de aplicações por meio do uso de containers.
-Pode ser pensado como um tipo de maquina virtual, porém diferentemente desta que necessita a criação de todo um sistema operacional virtual, o Docker, permite que as aplicações compartilhem o mesmo kernel Linux que o hospedeiro, reduzindo assim o tamanho da aplicação e obtendo um ganho de desempenho.
-
-\subsection{Docker Swarm}
-É uma ferramenta nativa do Docker que permite criar clusters de containers, chamado swarms, o que possibilitam a escalabilidade de recursos de acordo com a demanda(carga) (citar The Docker Book)
-O que possibilita que diversos hospedeiros de Docker estejam inseridos no mesmo pool de recursos, facilitando assim a implantação de containers, uma vez que o Swarm disponibiliza uma API de integração que abstrai grande parte das
-atividades necessárias a administração dos conteiners e promove um tipo de tolerancia a falhas
-\section{Histórico}
-
-\subsection{Arquitetura Monolítica}
-(Pensar ) Arquitetura Monolítica, é uma arquitetura de desenvolvimento, na qual típicamente , apesar da complexidade dos sistemas ser quebrada ao se utilizar módulos, esses são projetados para a criação de um único executável, o qual possui todos os seus módulos executados em um mesma máquina.
-Com o passar do tempo, o sistema cresce e tende a tornar-se cada vez mais complexo, o que gera diversos problemas em sua manutenção, por exemplo temos, a escalabilidade do sistema, que exige que o mesmo seja replicado inteiramente, mesmo que apenas uma parte desse seja necessária na nova instância, aumentando assim os custos.
-
-\subsection{Arquitetura de Microsserviços}
-\label{sec:microsservicos}
+O microsserviço deverá ser uma entidade separada.
 %
-O objetivo de uma arquitetura de microsserviços é funcionar separadamente de forma autônoma, contendo baixo acoplamento~\cite{Newman2015Feb}.
+A entidade deve ser implantada como um sistema independente em um \ac{paas}.
 %
-Seu funcionamento deve ser desenhado para permitir alinhamentos de alta coesão e baixo acoplamento entre os demais microsserviços existentes em um macrosserviço~\cite{8169955}.
+Toda a comunicação entre os microsserviços de um macrosserviço será executada sobre a rede, a fim de reforçar a separação entre cada serviço.
+%
+As chamadas pela rede com o cliente ou entre os microsserviços será executada através de uma \ac{api}, permitindo a liberdade de tecnologia em que cada um será implementado~\cite{Newman2015Feb}.
+%
+Isso permite que o sistema contenha tecnologias distintas que melhor resolvam os problemas relacionados ao contexto deste microsserviço.
+%
+Isso pode ser visualizado na Figura~\ref{fig:microsservicos_tecnologias}.
 
 
-
-Arquiteturas de microsserviços iniciam uma nova linha de desenvolvimento de aplicações preparadas para executar sobre nuvens computacionais, promovendo maior flexibilidade, escalabilidade, gerenciamento e desempenho, sendo a principal escolha de arquitetura de grandes empresas como Amazon, Netflix e LinkedIn~\cite{7830692,7515686}.
 
 \begin{figure}[htb!]
 \caption{Microsserviços podem ter diferentes tecnologias}
@@ -67,11 +61,13 @@ Arquiteturas de microsserviços iniciam uma nova linha de desenvolvimento de apl
 Adaptado de:~\cite{Newman2015Feb}
 \end{figure}
 
-O microsserviço deverá ser uma entidade separada. Ela deve ser implantada como um sistema independente em um \ac{paas}.
+
+
+Uma arquitetura de microsserviços é escalável, como visível na Figura \ref{fig:microsservicos_escalabilidade}.
 %
-Toda a comunicação entre os microsserviços de um macrosserviço será executada sobre a rede, a fim de reforçar a separação entre cada serviço.
+Ela permite o aumento do número de microsserviços sob demanda para suprir a necessidade de escalabilidade.
 %
-As chamadas pela rede com o cliente ou entre os microsserviços será executada através de uma \ac{api}, permitindo a liberdade de tecnologia em que cada um será implementado~\cite{Newman2015Feb}.
+Este modelo computacional obtém maior desempenho, principalmente se executar sobre plataformas de computação elástica, na qual o orquestrador do macrosserviço pode aumentar o número de instâncias conforme a necessidade de requisições~\cite{Nadareishvili2016Aug}.
 
 
 
@@ -86,12 +82,103 @@ Adaptado de:~\cite{Newman2015Feb}
 
 
 
-Uma arquitetura de microsserviços é escalável, como visível na Figura \ref{fig:microsservicos_escalabilidade}.
+Microsserviços desenvolvidos para web utilizam arquitetura \ac{rest} baseado sobre o protocolo \ac{http}.
 %
-Ela permite o aumento do número de microsserviços sob demanda para suprir a necessidade de escalabilidade.
-%
-Este modelo computacional obtém maior desempenho, principalmente se executar sobre plataformas de computação elástica, na qual o orquestrador do macrosserviço pode aumentar o número de instâncias conforme a necessidade de requisições~\cite{Nadareishvili2016Aug}.
+É uma boa prática utilizar o corpo com conteúdo da requisição e resposta no formato \ac{json} nas chamadas a uma \ac{api} de microsserviço web~\cite{Nadareishvili2016Aug}.
 
+Entretanto, necessita-se de um método para garantir o seu isolamento, a qual, em sistemas Linux, podem ser garantidos utilizando Containers.
+%
+Por este motivo, se faz necessário descreve-lo.
+
+
+
+\subsection{Containers}
+
+
+
+Os container permitem ao desenvolvedor "empacotar" sua aplicação e todas as suas dependências(ex. bibliotecas), dessa forma, lhe é garantido que a aplicação terá o mesmo comportamento independentemente do hospedeiro Linux.
+
+Um container Linux é um conjunto de processos que executam de forma isolada do restante do sistema. Esses processos utilizam arquivos providos de uma imagem, a qual lhe garante a compatibilidade a fim de evitar problemas de versionamento e conflitos de processos.
+%
+Essa separação pode ser visualizada na Figura~\ref{fig:container}.
+
+
+
+\begin{figure}[htb!]
+\caption{Containers sobre sistema linux}
+\label{fig:container}
+\includegraphics[height=4cm]{img/cap2/what-is-a-container.png}
+\centering
+
+Fonte:~\cite{container}
+\end{figure}
+
+
+
+Entretanto, se faz necessário uma ferramenta para gerenciamento de imagens e containers.
+%
+Entra em cena a partir de 2008 o \textit{Docker}, uma ferramenta que permite, de forma prática, a publicação de imagens no formato Dockerfile, além de contar com um gerenciador e repositório de imagens.
+
+
+\subsection{Docker}
+
+Docker é uma plataforma que nos permite "construir, emabarcar e rodar uma aplicação em qualquer lugar". Ele percorreu um longo caminho em um período de tempo incrivelmente curto e atualmente é considerado uma solução padrão para um dos apectos mais custosos do software: a implantação (citar Docker in Pratice)
+
+Docker é uma ferramenta desenvolvida para facilitar o processo de criação, implantação e execução de aplicações por meio do uso de containers.
+%
+Pode ser pensado como um tipo de maquina virtual, porém diferentemente desta que necessita a criação de todo um sistema operacional virtual, o Docker, permite que as aplicações compartilhem o mesmo kernel Linux que o hospedeiro, reduzindo assim o tamanho da aplicação e obtendo um ganho de desempenho.
+
+
+A tecnologia Docker usa o \textit{kernel} Linux, abstraindo sistemas como \textit{Cgroups} e \textit{namespaces} para segregar processos a fim que eles possam ser executados de forma independente.
+%
+O objetivo dos containers criados pelo Docker continua da mesma forma que  os containers Linux, conhecida como \textit{LXC}.
+%
+A diferença entre Docker e \textit{LXC} é relevante a escalabilidade, visto que containers Docker permitem multiplos processos executando juntamente a uma biblioteca, já o padrão \textit{LXC} permite somente um processo junto a sua biblioteca, consumindo mais recursos da máquina.
+%
+Essa comparação pode ser visualizada na Figura~\ref{fig:container_docker}.
+
+\begin{figure}[htb!]
+\caption{Tecnologia Docker em comparação aos containers Linux (LXC).}
+\label{fig:container_docker}
+\includegraphics[height=4cm]{img/cap2/traditional-linux-containers-vs-docker_0.png}
+\centering
+
+Fonte:~\cite{container}
+\end{figure}
+
+
+
+\subsection{Docker Swarm}
+
+É uma ferramenta nativa do Docker que permite criar clusters de containers, chamado swarms, o que possibilitam a escalabilidade de recursos de acordo com a demanda(carga) (citar The Docker Book)
+O que possibilita que diversos hospedeiros de Docker estejam inseridos no mesmo pool de recursos, facilitando assim a implantação de containers, uma vez que o Swarm disponibiliza uma API de integração que abstrai grande parte das
+atividades necessárias a administração dos conteiners e promove um tipo de tolerancia a falhas
+
+
+\begin{figure}[htb!]
+\caption{Rede de Docker Swarm.}
+\label{fig:docker_swarm}
+\includegraphics[height=4cm]{img/cap2/docker_swarm.png}
+\centering
+
+Fonte:~\cite{container}
+\end{figure}
+
+
+O seu principal objetivo é resolver problemas de gerência de microsserviços, a qual antes eram resolvidos somente com \textit{Kubernets}, uma ferramenta criada pela Google em 2015.
+%
+Com Docker Swarm, pode-se ter um nó líder que gerenciará a rede, e nós trabalhadores.
+%
+Um exemplo de rede Docker Swarm pode ser visualizado na Figura~\ref{fig:docker_swarm}.
+
+\section{Histórico}
+
+\subsection{Arquitetura Monolítica}
+
+(Pensar ) Arquitetura Monolítica, é uma arquitetura de desenvolvimento, na qual típicamente , apesar da complexidade dos sistemas ser quebrada ao se utilizar módulos, esses são projetados para a criação de um único executável, o qual possui todos os seus módulos executados em um mesma máquina.
+Com o passar do tempo, o sistema cresce e tende a tornar-se cada vez mais complexo, o que gera diversos problemas em sua manutenção, por exemplo temos, a escalabilidade do sistema, que exige que o mesmo seja replicado inteiramente, mesmo que apenas uma parte desse seja necessária na nova instância, aumentando assim os custos.
+
+Com a necessidade de escalabilidade, as arquiteturas de microsserviços obteram sucesso em grandes projetos comerciais como LinkedIn, Google e Youtube.
 
 \section{Funcionamento}
 
@@ -115,3 +202,71 @@ Microsserviços desenvolvidos para web utilizam arquitetura \ac{rest} baseado so
 \subsection{Streaming}
 
 \subsection{Jogos}
+
+Alguns exemplos de arquitetura de microsserviços para jogos \ac{mmorpg} são as arquiteturas apresentadas por Rudy (Figura~\ref{fig:rudy}), Salz (Figura~\ref{fig:salz}) e a arquitetura escrita por Knowles (Figura~\ref{fig:knowles}).
+
+
+\begin{figure}[htb!]
+  \caption{Arquitetura Rudy, utilizada no jogo Tibia.}
+  \label{fig:rudy}
+  \includegraphics[height=3.5cm]{arquiteturas/rudy.png}
+  \centering
+
+  Adaptado de:~\cite{matthiasrudy2011}
+\end{figure}
+
+
+\begin{figure}[htb!]
+  \caption{Arquitetura Salz, utilizada no jogo Albion.}
+  \label{fig:salz}
+  \includegraphics[height=3.5cm]{arquiteturas/salz.png}
+  \centering
+
+  Adaptado de:~\cite{albion_online_unite}
+\end{figure}%
+
+\begin{figure}[htb!]
+  \caption{Arquitetura Knowles, utilizada no jogo Guild Wars 2.}
+  \label{fig:knowles}
+  \includegraphics[height=5.5cm]{arquiteturas/knowles.png}
+  \centering
+
+  Adaptado de:~\cite{stephenclarkewillson2017}
+\end{figure}
+
+A arquitetura Rudy (Figura~\ref{fig:rudy}) é formada por um sistema cliente-servidor monolítico, na qual cada microsserviço individual gerencia um mundo mútuo dos demais gerenciadores de mundo~\cite{matthiasrudy2011}.
+%
+Essa arquitetura dificulta a escalabilidade, modificações e manutenção~\cite{8169955}, além de segregar a comunidade de jogadores em servidores menores~\cite{matthiasrudy2011}.
+%
+Inicialmente essa arquitetura foi pensada para ser um sistema Cliente-Servidor monolítico.
+%
+A arquitetura Rudy é uma arquitetura de microsserviços adaptada de um serviço cliente-servidor~\cite{matthiasrudy2011}.
+%
+O jogo Tibia\footnote[1]{Tibia: \url{http://www.tibia.com}}, operante sobre essa arquitetura, possui 68 mundos oficiais (Sendo 2 servidores de teste)~\cite{matthiasrudy2011}, com capacidade para 1.050 clientes em cada servidor, na qual encontra-se restringido pelo gerenciador de mundo.
+
+
+
+A arquitetura Salz (Figura~\ref{fig:salz}) é formada por diversos microsserviços~\cite{albion_online_unite}.
+%
+O principal objetivo dessa arquitetura é modularizar o serviço visando melhorar a escalabilidade.
+%
+Ela é atualmente utilizada no jogo Albion Online\footnote[2]{Albion Online: \url{https://albiononline.com}}.
+%
+A arquitetura é planejada para funcionar conforme a seguinte especificação\cite{albion_online_unite}:
+
+\begin{itemize}
+  \item O mundo é distribuído sobre os vários servidores de mapas. Cada microsserviço gerencia uma região do mundo, denominado \textit{chunk}.
+  \item Jogadores mudam a conexão com os microsserviços quando estão posicionados na borda de um \textit{chunk}.
+  \item A autorização de acesso aos microsserviços é obtido pelo banco de dados.
+  \item O coordenador do mundo é responsável por tudo que seja de escopo global (\textit{e. g.,} Grupos, chat global, guildas, \textit{etc.}).
+\end{itemize}
+
+A arquitetura Knowles (Figura~\ref{fig:knowles}) é distribuída em diversos microsserviços, assim como a arquitetura Salz (Figura~\ref{fig:salz}).
+%
+A diferença em comparação a arquitetura Salz (Figura~\ref{fig:salz}) está na decomposição da arquitetura para outros microsserviços e a conexão direta entre esses microsserviços e o cliente.
+%
+O principal objetivo dessa arquitetura é facilitar a manutenção e desempenho de reinicialização do macrosserviço~\cite{stephenclarkewillson2017}.
+%
+Guild Wars 2\footnote[3]{Guild Wars 2: \url{https://www.guildwars2.com}} é um jogo que executa sobre a arquitetura Knowles.
+%
+Ele é popularmente conhecido por ter seus serviços sempre ativos, visto que a arquitetura possibilita desativar pequenos pedaços do serviço para manutenções básicas e a sua reinicialização é rápida para manutenções críticas.
