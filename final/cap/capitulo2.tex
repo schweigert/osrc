@@ -2,9 +2,25 @@
 \label{cap2}
 
 \section{Walmart}
+Por volta do ano de 2012, o Walmart decidiu migrar sua arquitetura monolítica para a arquitetura de microsserviços, uma vez a arquitetura anterior falhou 2 anos seguidos na entrega dos serviços durante o black friday.
+A arquitetura de microsserviços foi escolhida devido a sua escalabilidade de acordo com a demanda e também buscando atingir o mais próximo possível a meta de 100\% de disponibilidade de seus serviços.
+Os custos operacionais foram reduzidos significativamente, uma vez que com essa nova arquitetura, a empresa pode migrar de servidores com hardware específico para servidores com hardware "comum"(AMD64). Foi atingida uma economia de 40\% do poder computacional e de 20-50\% do custos em geral~\cite{msWalmartSpotify}.
+Estima se que por volta de 3.000 engenheiros utilizando essa aquitetura são responsáveis por 30.000 alterações por mês nos sistemas do Walmart~\cite{microservicesWalmart1}
 
 \section{Spotify}
+ O Spotify possui mais de 75 milhões de usuários por mês, em que cada uma dessas sessões duração em média 23 minutos, ou seja, escalabilidade e disponibilidade são imperativas.
+Além desses fatores a empresa possui mais de 90 equipes de desenvolvimento, 600 desenvolvedores e 5 escritórios de desenvolvimento em 2 continentes construindo o mesmo produto, portanto era necessário reduzir ao máximo as dependencias existentes entre os componentes do software~\cite{msWalmartSpotify}.
+A solução encontrada foi a arquitetura de microsserviços com equipes de desenvolvimento full-stack, que são compostas por desenvolvedores back-end, desenvolvedores front-end, testers, designer de interfaces de usuário e dono do produto. Suas missões não sobrepoem as missões de outras equipes, já que são equipes autônomas.
 
 \section{Amazon}
+Por volta do ano de 2001, a Amazon, possuia uma grande arquitetura monolítica~\cite{microservicesAmazon1}. Porém com o passar do tempo, os projetos foram amadurecendo, mais desenvolvedores foram adicionados e a base de código foi crescendo e a complexidade da arquitetura foi crescendo, o que ocasionou no aumento de duração do ciclo de desenvolvimento dos softwares.
+Mas a complexidade ainda maior era a de prever a demanda devido ao tráfego de acesso flutuante, a Amazon perdia dinheiro e a maioria da capacidade de processamento era desperdiçada em momentos de baixo tráfego. Ao realizar a migração para o Amazon Web Services(AWS) permitiu em conjunto com o uso da arquitetura de microsserviços implementar uma maior escalabilidade, além de permitir o deployment contínuo do código, atualmente os engenheiros realizam o deploy do código a cada 11.7 segundos \cite{microservicesAmazon2}.
 
 \section{Guild Wars 2}
+Guild Wars 2 foi publicado em 2012, possuindo um vasto ambiente a qual jogadores podem interagir entre sí.
+%
+Entretanto, a sua arquitetura de microsserviços possui 80 tipos de microsserviços diferentes, entre serviços baseados em \textit{Web} e protocolos proprietários sobre \ac{tcp}.
+%
+Nesse sentido, a sua grande dificuldade é o gerenciamento de reinicialização dos microsserviços, a qual precisam ser coordenados por um orquestrador a fim de permitir o roteamento correto das requisições dos jogadores.
+%
+A solução encontrada para este problema foi um orquestrador a qual coloque serviços ao hardware, permissões, roteamento de requisições e isolamento, visto que esta arquitetura de microsserviços nãõ utiliza virtualização e não tem os benefícios das técnicas de Docker Swarm.

@@ -10,7 +10,7 @@ A fim de orientar o análise encontrada neste trabalho, se faz necessário a des
 Por esse motivo, esta seção irá introduzir os conceitos de microsserviços, containers, docker e implantação utilizando a técnica de docker swarm.
 
 
-\subsection{Microserviços}
+\subsection{Microserviços: Definição e Funcionamento}
 
 Entende-se por microsserviço, aplicações que executam operações menores de um macrosserviço, da melhor forma possível~\cite{stephenclarkewillson2017, Newman2015Feb}.
 %
@@ -122,7 +122,8 @@ Entra em cena a partir de 2008 o \textit{Docker}, uma ferramenta que permite, de
 
 \subsection{Docker}
 
-Docker é uma plataforma que nos permite "construir, emabarcar e rodar uma aplicação em qualquer lugar". Ele percorreu um longo caminho em um período de tempo incrivelmente curto e atualmente é considerado uma solução padrão para um dos apectos mais custosos do software: a implantação (citar Docker in Pratice)
+Docker é uma plataforma que nos permite "construir, emabarcar e rodar uma aplicação em qualquer lugar". Ele percorreu um longo caminho em um período de tempo incrivelmente curto e atualmente é considerado uma solução padrão para um dos apectos mais custosos do software: a implantação
+~\cite{miellJan16}
 
 Docker é uma ferramenta desenvolvida para facilitar o processo de criação, implantação e execução de aplicações por meio do uso de containers.
 %
@@ -150,7 +151,7 @@ Fonte:~\cite{container}
 
 \subsection{Docker Swarm}
 
-É uma ferramenta nativa do Docker que permite criar clusters de containers, chamado swarms, o que possibilitam a escalabilidade de recursos de acordo com a demanda(carga) (citar The Docker Book)
+É uma ferramenta nativa do Docker que permite criar clusters de containers, chamado swarms, o que possibilitam a escalabilidade de recursos de acordo com a demanda(carga)~\cite{turnbullMarc17}
 O que possibilita que diversos hospedeiros de Docker estejam inseridos no mesmo pool de recursos, facilitando assim a implantação de containers, uma vez que o Swarm disponibiliza uma API de integração que abstrai grande parte das
 atividades necessárias a administração dos conteiners e promove um tipo de tolerancia a falhas
 
@@ -171,16 +172,25 @@ Com Docker Swarm, pode-se ter um nó líder que gerenciará a rede, e nós traba
 %
 Um exemplo de rede Docker Swarm pode ser visualizado na Figura~\ref{fig:docker_swarm}.
 
-\section{Histórico}
+%\section{Histórico}
 
 \subsection{Arquitetura Monolítica}
 
-(Pensar ) Arquitetura Monolítica, é uma arquitetura de desenvolvimento, na qual típicamente , apesar da complexidade dos sistemas ser quebrada ao se utilizar módulos, esses são projetados para a criação de um único executável, o qual possui todos os seus módulos executados em um mesma máquina.
+Arquitetura Monolítica, é uma arquitetura de desenvolvimento, na qual típicamente , apesar da complexidade dos sistemas ser quebrada ao se utilizar módulos, esses são projetados para a criação de um único executável, o qual possui todos os seus módulos executados em um mesma máquina.
 Com o passar do tempo, o sistema cresce e tende a tornar-se cada vez mais complexo, o que gera diversos problemas em sua manutenção, por exemplo temos, a escalabilidade do sistema, que exige que o mesmo seja replicado inteiramente, mesmo que apenas uma parte desse seja necessária na nova instância, aumentando assim os custos.
 
 Com a necessidade de escalabilidade, as arquiteturas de microsserviços obteram sucesso em grandes projetos comerciais como LinkedIn, Google e Youtube.
 
-\section{Funcionamento}
+\begin{figure}[htb!]
+\caption{Arquitetura Monolítica X Arquitetura de Microsserviços}
+\label{fig:}
+\includegraphics[height=4cm]{img/cap2/monoXmicro.png}
+\centering
+\end{figure}
+
+
+%\section{Funcionamento}
+
 
 \section{Boas práticas}
 \begin{itemize}
@@ -189,6 +199,7 @@ Com a necessidade de escalabilidade, as arquiteturas de microsserviços obteram 
 	\item Não executar mais de um processo/aplicação em um único container, pois tal comportamento acarretará em aumento da complexidade do gerenciamento e no número de logs.
 	\item Não dos endereços IP dos containers, o endereço IP do container pode se alterado quando o mesmo é iniciado e parado. Caso seja necessária a comunicação entre a aplicação ou microsserviço e um outro container, é recomendado o uso de variáveis de ambiente para transmitir o hostname e porta corretos de um container para outro.
 \end{itemize}
+\cite{boasPraticas}
 
 
 
@@ -200,7 +211,7 @@ Microsserviços desenvolvidos para web utilizam arquitetura \ac{rest} baseado so
 É uma boa prática utilizar o corpo com conteúdo da requisição e resposta no formato \ac{json} nas chamadas a uma \ac{api} de microsserviço web~\cite{Nadareishvili2016Aug}.
 
 \subsection{Streaming}
-
+Devido as suas propriedades os microsserviços, possibilitam que operações de streaming(cloud-based) possuam maior elasticidade e escalabilidade do que uma implementação padrão(monolítica), além de possibilitar a redução de custos de operação.\cite{microservicosStreaming}
 \subsection{Jogos}
 
 Alguns exemplos de arquitetura de microsserviços para jogos \ac{mmorpg} são as arquiteturas apresentadas por Rudy (Figura~\ref{fig:rudy}), Salz (Figura~\ref{fig:salz}) e a arquitetura escrita por Knowles (Figura~\ref{fig:knowles}).
